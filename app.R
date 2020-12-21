@@ -394,7 +394,7 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                     selectize = FALSE
                 )
             ),
-            br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+            br(),br(),
             "Data source : ", tags$a(href="https://academic.udayton.edu/kissock/http/Weather/", "University of Dayton - Temperature Archive"),".",
             br(),br(),
             "To report bugs, please open an issue at ", tags$a(href="https://github.com/stevin-wilson/worldwide_temperature_visualization/issues", "Worldwide Temperature Visualization@Github")
