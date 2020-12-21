@@ -393,7 +393,9 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                 )
             ),
             br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
-            "Data source : ", tags$a(href="https://academic.udayton.edu/kissock/http/Weather/", "University of Dayton - Temperature Archive")
+            "Data source : ", tags$a(href="https://academic.udayton.edu/kissock/http/Weather/", "University of Dayton - Temperature Archive"),".",
+            br(),br(),
+            "To report bugs, please open an issue at ", tags$a(href="https://github.com/stevin-wilson/worldwide_temperature_visualization/issues", "Worldwide Temperature Visualization@Github")
         ),
 
         # Show a plot of the generated distribution
@@ -446,18 +448,19 @@ server <- function(input, output) {
                 mutate(date = ymd(date)) %>%
                 ggplot( aes(month(date, label=TRUE, abbr=TRUE), 
                                                          mean_temperature_in_fahrenheit, group=year(date), colour=year(date))) +
-                labs(x="Month", colour="Year", y = "Average temperature (in Fahrenheit)")
+                labs(x="Month", colour="Year", y = "Average temperature (in Fahrenheit)") +
+                scale_y_continuous(breaks=seq(-200,200,10))
         } else if (input$unit.selected == "Celsius") {
             ggplot_weather <- select.cities.years.df() %>%
                 mutate(date = paste(year, month, "15" , sep = "-")) %>%
                 mutate(date = ymd(date)) %>%
                 ggplot( aes(month(date, label=TRUE, abbr=TRUE), 
                                                          mean_temperature_in_celsius, group=year(date), colour=year(date))) +
-                labs(x="Month", colour="Year", y = "Average temperature (in Celsius)")   
+                labs(x="Month", colour="Year", y = "Average temperature (in Celsius)") +
+                scale_y_continuous(breaks=seq(-200,200,5))
         }
         ggplot_weather + geom_point() +
             geom_line(alpha = 0.8) +
-            scale_y_continuous(breaks=seq(-200,200,2.5)) +
             facet_wrap(~ state_city) +
             theme_dark()+
             theme(strip.background =element_rect(fill="black"),
