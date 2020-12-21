@@ -8,7 +8,9 @@
 #
 
 library(shiny)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 library(shinythemes)
 library(viridis)
 library(lubridate)
